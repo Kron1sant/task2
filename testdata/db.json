@@ -1,0 +1,6 @@
+[
+    {"product": "Печенье", "price": 34, "rating": 3},
+    {"product": "Сахар", "price": 45, "rating": 2},
+    {"product": "Варенье", "price": 200, "rating": 5},
+	{"product": "Сушки", "price": 100, "rating": 7}
+]
