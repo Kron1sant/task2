@@ -32,7 +32,7 @@ func main() {
 	}
 
 	// Looking for the desired values
-	mostExpensiveItem, mostRatedItem := FindTopItems(filename)
+	mostExpensiveItem, mostRatedItem := findTopItems(filename)
 
 	// Printing the result
 	fmt.Printf("The most expensive product %s with a price of %d\n", mostExpensiveItem.Product, mostExpensiveItem.Price)
@@ -55,11 +55,11 @@ func getFilenameFromCLI() string {
 	return args[0]
 }
 
-func FindTopItems(filename string) (Record, Record) {
+func findTopItems(filename string) (Record, Record) {
 
 	// Use an aggregator that implements the logic of
 	// looking for the most expensive and the most rated items
-	aggregator := NewAggregator()
+	aggregator := newAggregator()
 
 	// Choose a parser depending on the file type
 	// and then give the filename and the aggregator to the parser
@@ -67,7 +67,7 @@ func FindTopItems(filename string) (Record, Record) {
 	case CSV:
 		readCSV(filename, aggregator)
 	case JSON:
-		ReadJSON(filename, aggregator)
+		readJSON(filename, aggregator)
 	}
 
 	return aggregator.MostExpensiveItem, aggregator.MostRatedItem
@@ -84,25 +84,4 @@ func getTypeOfFile(filename string) TypeOfDataFile {
 		log.Fatalf("Unknown file extension: %s", ext)
 	}
 	return 0
-}
-
-// Aggregator allows to aggregate the most expensive and most rated product.
-// If several products have the same value, then take the first one
-type Aggregator struct {
-	MostExpensiveItem Record
-	MostRatedItem     Record
-}
-
-func NewAggregator() *Aggregator {
-	return &Aggregator{}
-}
-
-// ExamineRecord compares the current values with the new record
-func (a *Aggregator) ExamineRecord(rec Record) {
-	if rec.Price > a.MostExpensiveItem.Price {
-		a.MostExpensiveItem = rec
-	}
-	if rec.Rating > a.MostRatedItem.Rating {
-		a.MostRatedItem = rec
-	}
 }

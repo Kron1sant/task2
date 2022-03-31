@@ -22,7 +22,7 @@ func TestFindTopItems(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got1, got2 := FindTopItems(tt.args.filename)
+			got1, got2 := findTopItems(tt.args.filename)
 			if !reflect.DeepEqual(got1, tt.mostExpensiveItem) {
 				t.Errorf("FindTopItems() mostExpensiveItem = %v, want %v", got1, tt.mostExpensiveItem)
 			}

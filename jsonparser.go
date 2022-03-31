@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func ReadJSON(filename string, aggregator *Aggregator) {
+func readJSON(filename string, aggregator *Aggregator) {
 	f, err := os.Open(filename)
 	if err != nil {
 		log.Fatalf("Failed opening a file: %s", err)
